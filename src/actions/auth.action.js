@@ -1,5 +1,4 @@
 import * as api from "../api/auth.api";
-import axios from "axios";
 
 export const LOGIN_PENDING = 'Login pending';
 export const LOGIN_SUCCESS = 'Login success';
