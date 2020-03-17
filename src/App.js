@@ -1,20 +1,27 @@
 import React from 'react';
 import './App.css';
 import Router from './routes';
-import {getMe} from "./actions/auth.action";
 import {connect} from "react-redux";
+import {getMe} from "./actions/auth.action";
 
 class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            loading: true
+        }
+    }
 
-    componentDidMount() {
-        this.props.getMe();
+    UNSAFE_componentWillMount() {
+        this.props.getMe().then(() => this.setState({loading: false}));
     }
 
     render() {
         const {authenticated} = this.props;
+        const {loading} = this.state;
 
         return (
-            <Router authenticated={authenticated} />
+            loading ? null : <Router authenticated={authenticated} />
         );
     }
 }
@@ -24,7 +31,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    getMe: () => dispatch(getMe()),
+    getMe: () => dispatch(getMe())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

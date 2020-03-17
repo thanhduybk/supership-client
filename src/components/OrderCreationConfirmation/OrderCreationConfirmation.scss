@@ -1,0 +1,16 @@
+#order-creation-confirm {
+  margin: 0 calc(5%);
+
+  #submit-button {
+    padding: 0 calc(33%);
+    margin: 0 calc(5%);
+  }
+
+  #fees {
+    margin: 0 calc(5%) 10px;
+
+    :nth-child(1) {
+      margin-bottom: 10px;
+    }
+  }
+}

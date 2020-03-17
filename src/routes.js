@@ -4,22 +4,30 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import HomePage from "./pages/HomePage/HomePage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
+import MainLayout from "./components/MainLayout";
+import OrderCreationPage from "./pages/OrderCreationPage/OrderCreationPage";
 
 const PrivateRoute = ({component: Component, authenticated, ...rest}) => (
-    <Route
-        {...rest}
-        render={() => (authenticated ? <Component authenticated={authenticated} {...rest} /> : <Redirect to="/login"/>)}
-    />
+    <Route render={
+        props => authenticated ? <Component {...props} authenticated={authenticated} /> : <Redirect to='/login'/>
+    }/>
 );
 
-function WebRouter({authenticated}) {
+function WebRouter(props) {
     return (
         <BrowserRouter>
             <Switch>
                 <Route exact path="/login" component={LoginPage}/>
                 <Route exact path="/register" component={RegisterPage}/>
-                <PrivateRoute exact path="/" component={HomePage} authenticated={authenticated}/>
-                <Route component={NotFoundPage} authenticated={authenticated}/>
+
+                <MainLayout>
+                    <Switch>
+                        <PrivateRoute exact path="/" component={HomePage} authenticated={props.authenticated} />
+                        <PrivateRoute exact path="/orders/create" component={OrderCreationPage} authenticated={props.authenticated} />
+                    </Switch>
+                </MainLayout>
+
+                <Route component={NotFoundPage}/>
             </Switch>
         </BrowserRouter>
     )

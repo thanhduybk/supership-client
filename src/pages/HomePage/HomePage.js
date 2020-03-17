@@ -1,16 +1,14 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import './HomePage.scss';
+import {getMe} from "../../actions/auth.action";
 
 class HomePage extends Component {
     componentDidMount() {
-        console.log(this.props);
+
     }
 
     render() {
-
-
         return (
             <div className="home-container">
                 Home Page
@@ -19,6 +17,12 @@ class HomePage extends Component {
     }
 }
 
-HomePage.propTypes = {};
+const mapStateToProps = state => ({
 
-export default connect(null)(HomePage)
+});
+
+const mapDispatchToProps = dispatch => ({
+    getMe: () => dispatch(getMe())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

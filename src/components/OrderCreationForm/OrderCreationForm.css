@@ -1,0 +1,5 @@
+#order-creation-form {
+  margin-top: 20px; }
+  #order-creation-form .inline-field {
+    display: inline-block;
+    width: calc(50%); }

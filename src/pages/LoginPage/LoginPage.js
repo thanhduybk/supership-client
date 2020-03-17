@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Form, Input, Button, notification, Icon, Checkbox} from 'antd';
 import {Link} from 'react-router-dom';
@@ -8,10 +8,9 @@ import './LoginPage.scss';
 
 class LoginPage extends Component {
     handleSubmit = e => {
-        const {form, login} = this.props;
         e.preventDefault();
+        const {form, login} = this.props;
         form.validateFields((err, values) => {
-            console.log(values);
             if (!err) {
                 const {emailOrPhone, password} = values;
                 login(emailOrPhone, password).then(() => {
@@ -71,10 +70,8 @@ class LoginPage extends Component {
                         )}
                     </Form.Item>
                     <Form.Item>
-                        <Form.Item name="remember" valuePropName="checked" noStyle style={{display: 'inline'}}>
-                            {getFieldDecorator('remember', {
-                                rules: [{required: false}],
-                            })(<Checkbox className="remember">Remember me</Checkbox>)}
+                        <Form.Item name="remember" style={{display: 'inline'}}>
+                            <Checkbox className="remember">Remember me</Checkbox>)
 
                             <Button type="primary" htmlType="submit" className="login-button" >
                                 Log in

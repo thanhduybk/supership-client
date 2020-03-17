@@ -26,7 +26,7 @@ export default function authReducer(state = initState, action) {
         case LOGIN_SUCCESS:
             return {...state, pending: false, message: action.payload.message, authenticated: true};
         case LOGIN_FAILED:
-            return {...state, pending: false, message: action.payload.message, authenticated: false};
+            return {...state, pending: false, message: action.payload.message};
         case REGISTER_SUCCESS:
         case REGISTER_FAILED:
             return {...state, pending: false, message: action.payload.message};

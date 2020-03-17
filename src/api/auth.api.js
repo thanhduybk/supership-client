@@ -1,5 +1,5 @@
 import Axios from "axios";
-import {AUTH_URL} from "../constants/api";
+import {AUTH_URL} from "../common/constants/api";
 
 export const login = (emailOrPhone, password) => {
     return Axios.post(`${AUTH_URL}/login`, {emailOrPhone, password});

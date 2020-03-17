@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
+import './Sidebar.scss';
 
-class NotFoundPage extends Component {
+class Sidebar extends Component {
     render() {
         return (
             <div>
-                Not Found!!!
+
             </div>
         );
     }
 }
 
 
-export default NotFoundPage;
+export default Sidebar;

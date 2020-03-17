@@ -1,0 +1,9 @@
+#order-creation-confirm {
+  margin: 0 calc(5%); }
+  #order-creation-confirm #submit-button {
+    padding: 0 calc(33%);
+    margin: 0 calc(5%); }
+  #order-creation-confirm #fees {
+    margin: 0 calc(5%) 10px; }
+    #order-creation-confirm #fees :nth-child(1) {
+      margin-bottom: 10px; }
