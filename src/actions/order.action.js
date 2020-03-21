@@ -1,5 +1,6 @@
 import * as api from '../api/order.api';
 import {requestCompleted, requestFailure, requestPending} from "./action.creators";
+import Papa from 'papaparse'
 
 export const GET_ALL_ORDERS_PENDING = 'Get all orders pending';
 export const GET_ALL_ORDERS_SUCCESS = 'Get all orders success';
@@ -21,7 +22,11 @@ export const DELETE_ORDER_PENDING = 'Delete order pending';
 export const DELETE_ORDER_SUCCESS = 'Delete order success';
 export const DELETE_ORDER_FAILED = 'Delete order failure';
 
-export function all() {
+export const UPLOAD_ORDERS_PENDING = 'Upload orders pending';
+export const UPLOAD_ORDERS_SUCCESS = 'Upload orders success';
+export const UPLOAD_ORDERS_FAILED = 'Upload orders failed';
+
+export function getOrders() {
     return async (dispatch) => {
         try {
             dispatch(requestPending(GET_ALL_ORDERS_PENDING));
@@ -40,7 +45,7 @@ export function all() {
     }
 }
 
-export function one(id) {
+export function getOrder(id) {
     return async (dispatch) => {
         try {
             dispatch(requestPending(GET_ONE_ORDER_PENDING));
@@ -59,59 +64,96 @@ export function one(id) {
     }
 }
 
-export function create(product, receiver, address, ward_id, repository_id, money_taking = 0) {
+export function createOrder(product, receiver, address, wardId, repositoryId, moneyTaking) {
     return async (dispatch) => {
         try {
             dispatch(requestPending(CREATE_ORDER_PENDING));
-            const {data} = await api.create(product, receiver, address, ward_id, repository_id, money_taking);
+            const {data, status} = await api.create(product, receiver, address, wardId, repositoryId, parseInt(moneyTaking));
             dispatch(requestCompleted(CREATE_ORDER_SUCCESS, data));
+            return status;
         } catch (err) {
             if (err.response) {
                 console.log(err.response.data);
-                dispatch(requestFailure(CREATE_ORDER_FAILED, err.response.data))
+                dispatch(requestFailure(CREATE_ORDER_FAILED, err.response.data));
+                return err.response.status;
             } else if (err.request) { // No response was received
                 console.log(err.request);
+                return 500;
             } else { // Something happened in setting up the request that triggered an Error
                 console.log('Error', err.message);
+                return 500;
             }
         }
     }
 }
 
-export function update(id, product, receiver, address, ward_id, repository_id, money_taking = 0) {
+export function updateOrder(id, product, receiver, address, wardId, repositoryId, moneyTaking = 0) {
     return async (dispatch) => {
         try {
             dispatch(requestPending(UPDATE_ORDER_PENDING));
-            const {data} = await api.update(id, product, receiver, address, ward_id, repository_id, money_taking);
+            const {data, status} = await api.update(id, product, receiver, address, wardId, repositoryId, moneyTaking);
             dispatch(requestCompleted(UPDATE_ORDER_SUCCESS, data));
+            return status;
         } catch (err) {
             if (err.response) {
                 console.log(err.response.data);
-                dispatch(requestFailure(UPDATE_ORDER_FAILED, err.response.data))
+                dispatch(requestFailure(UPDATE_ORDER_FAILED, err.response.data));
+                return err.response.status;
             } else if (err.request) { // No response was received
                 console.log(err.request);
+                return 500;
             } else { // Something happened in setting up the request that triggered an Error
                 console.log('Error', err.message);
+                return 500;
             }
         }
     }
 }
 
-export function destroy(id) {
+export function destroyOrder(id) {
     return async (dispatch) => {
         try {
             dispatch(requestPending(DELETE_ORDER_PENDING));
-            const {data} = await api.destroy(id);
+            const {data, status} = await api.destroy(id);
             dispatch(requestCompleted(DELETE_ORDER_SUCCESS, data));
+            return status;
         } catch (err) {
             if (err.response) {
                 console.log(err.response.data);
-                dispatch(requestFailure(DELETE_ORDER_FAILED, err.response.data))
+                dispatch(requestFailure(DELETE_ORDER_FAILED, err.response.data));
+                return err.response.status;
             } else if (err.request) { // No response was received
                 console.log(err.request);
+                return 500;
             } else { // Something happened in setting up the request that triggered an Error
                 console.log('Error', err.message);
+                return 500;
             }
         }
     }
+}
+
+export function uploadOrders(file) {
+    const orders = Papa.parse(file);
+    console.log(orders);
+    // return async dispatch => {
+    //     try {
+    //         dispatch(UPLOAD_ORDERS_PENDING);
+    //         const orders = await Papa.parse(file);
+    //         console.log(orders);
+    //         dispatch(UPLOAD_ORDERS_SUCCESS, orders);
+    //     } catch (err) {
+    //         if (err.response) {
+    //             console.log(err.response.data);
+    //             dispatch(requestFailure(UPLOAD_ORDERS_FAILED, err.response.data));
+    //             return err.response.status;
+    //         } else if (err.request) { // No response was received
+    //             console.log(err.request);
+    //             return 500;
+    //         } else { // Something happened in setting up the request that triggered an Error
+    //             console.log('Error', err.message);
+    //             return 500;
+    //         }
+    //     }
+    // }
 }

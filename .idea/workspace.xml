@@ -2,39 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8e92e69a-45bc-4ca9-9b6d-72bef5bd45d4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/actions/action.creators.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/actions/address.action.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/actions/order.action.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/actions/repository.action.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/api/address.api.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/api/order.api.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/api/repository.api.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Breadcrumb/Breadcrumb.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Breadcrumb/Breadcrumb.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Header/Header.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Header/Header.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/MainLayout.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/OrderCreationConfirmation/OrderCreationConfirmation.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/OrderCreationConfirmation/OrderCreationConfirmation.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/OrderCreationForm/OrderCreationForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/OrderCreationForm/OrderCreationForm.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Sidebar/Sidebar.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Sidebar/Sidebar.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/OrderCreationPage/OrderCreationPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/OrderCreationPage/OrderCreationPage.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reducers/repository.reducer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/OrderRemovingModal/OrderRemovingModal.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/OrderUpdatingModal/OrderUpdatingModal.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/OrderUpdatingModal/OrderUpdatingModal.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/OrderUploadModal/OrderUploadModal.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/OrdersPage/OrdersPage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/OrdersPage/OrdersPage.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/reducers/order.reducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/ntduycs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/ntduycs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/actions/auth.action.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/auth.action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/auth.api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/auth.api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/constants/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/HomePage/HomePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/HomePage/HomePage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions/order.action.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/order.action.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/Header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/OrderCreationConfirmation/OrderCreationConfirmation.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/OrderCreationConfirmation/OrderCreationConfirmation.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/OrderCreationConfirmation/OrderCreationConfirmation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/OrderCreationConfirmation/OrderCreationConfirmation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/OrderCreationConfirmation/OrderCreationConfirmation.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/OrderCreationConfirmation/OrderCreationConfirmation.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/OrderCreationForm/OrderCreationForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/OrderCreationForm/OrderCreationForm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/LoginPage/LoginPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/LoginPage/LoginPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/NotFoundPage/NotFoundPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/NotFoundPage/NotFoundPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/auth.reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/auth.reducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/OrderCreationPage/OrderCreationPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/OrderCreationPage/OrderCreationPage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/reducers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +80,7 @@
       <updated>1584256278003</updated>
       <workItem from="1584256279793" duration="11789000" />
       <workItem from="1584273099218" duration="33068000" />
-      <workItem from="1584440714734" duration="9417000" />
+      <workItem from="1584440714734" duration="31602000" />
     </task>
     <servers />
   </component>

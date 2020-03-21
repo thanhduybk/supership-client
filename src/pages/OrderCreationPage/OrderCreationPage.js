@@ -6,35 +6,44 @@ import OrderCreationConfirmation from "../../components/OrderCreationConfirmatio
 
 class OrderCreationPage extends Component {
 
+    saveFormRef = formRef => {
+        this.formRef = formRef;
+    };
+
+    request = {
+        repositoryId: null, // number
+        product: '', // string
+        receiver: '', // string
+        address: '', // string
+        wardId: null, // number
+        moneyTaking: 0 // number
+    };
+
+    onRequestChange = (field, value) => {
+        this.request[field] = value;
+    };
+
+    onRequestSubmitted = () => {
+        this.formRef.validateFields();
+        return this.formRef.getFieldsValue();
+    };
 
     render() {
-        const request = {
-            repository_id: null, // number
-            product: '', // string
-            receiver: '', // string
-            address: '', // string
-            ward_id: null, // number
-            money_taking: 0 // number
-        };
-
-        const onRequestChange = (field, value) => {
-            request[field] = value;
-        };
-
-        const onRequestSubmitted = () => {
-            console.log(request);
-        };
-
+        // console.log(this.props);
         return (
             <div id="order-creation">
                 <Row>
                     <Col span={15}>
-                        <OrderCreationForm onRequestChange={onRequestChange}/>
+                        <OrderCreationForm
+                            onRequestChange={this.onRequestChange}
+                            saveFormRef={this.saveFormRef}
+                        />
                     </Col>
                     <Col span={9}>
                         <OrderCreationConfirmation
-                            data={request}
-                            onRequestSubmitted={onRequestSubmitted}
+                            onRequestSubmitted={this.onRequestSubmitted}
+                            formRef={this.formRef}
+                            history={this.props.history}
                         />
                     </Col>
                 </Row>

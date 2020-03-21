@@ -5,7 +5,6 @@ import './OrderCreationForm.scss'
 import {connect} from "react-redux";
 import {allDistricts, allProvinces, allWards} from "../../actions/address.action";
 
-
 const {Option} = Select;
 
 class OrderCreationForm extends Component {
@@ -25,12 +24,12 @@ class OrderCreationForm extends Component {
     }
 
     handleInputFieldChange({target: {value}}, field) {
-        // console.log(field, value);
         this.props.onRequestChange(field, value);
     };
 
 
     async componentDidMount() {
+        this.props.saveFormRef(this.props.form);
         await this.props.fetchAllRepositories();
         const provinces = await this.props.fetchAllProvinces();
         this.setState({
@@ -50,21 +49,14 @@ class OrderCreationForm extends Component {
         this.setState({wards});
     };
 
-    handleSubmit = e => {
-        e.preventDefault();
-        this.props.form.validateFields((errors, values) => {
-            if (!errors) {
-                console.log('Received', values);
-            }
-        });
-    };
-
     parseRepositoryInfo = (repository) => {
         return repository.name + " - " + repository.address;
     };
 
     render() {
         const {getFieldDecorator} = this.props.form;
+        const {repositories} = this.props;
+
         const {loading, provinces, districts, wards} = this.state;
 
         const formItemLayout = {
@@ -93,15 +85,13 @@ class OrderCreationForm extends Component {
             return null;
         }
 
-        const {repositories} = this.props;
-
         return (
             <>
                 <hr/>
-                <Form {...formItemLayout} onSubmit={this.handleSubmit} id="order-creation-form">
+                <Form {...formItemLayout} id="order-creation-form">
 
                     <Form.Item label="Repository">
-                        {getFieldDecorator('repository', {
+                        {getFieldDecorator('repository_id', {
                             initialValue: null,
                             rules: [
                                 {
@@ -195,7 +185,7 @@ class OrderCreationForm extends Component {
                         })(<Input onBlur={e => this.handleInputFieldChange(e, 'address')}/>)}
                     </Form.Item>
                     <Form.Item label="Ward" className="inline-field" {...formInlineItemLayout}>
-                        {getFieldDecorator('ward', {
+                        {getFieldDecorator('ward_id', {
                             initialValue: null,
                             rules: [
                                 {

@@ -3,6 +3,8 @@ import './App.css';
 import Router from './routes';
 import {connect} from "react-redux";
 import {getMe} from "./actions/auth.action";
+import {getOrders} from "./actions/order.action";
+import {all} from "./actions/repository.action";
 
 class App extends React.Component {
     constructor(props) {
@@ -13,7 +15,10 @@ class App extends React.Component {
     }
 
     UNSAFE_componentWillMount() {
-        this.props.getMe().then(() => this.setState({loading: false}));
+        this.props.getMe()
+            .then(() => this.props.getMyRepositories())
+            .then(() => this.props.getMyOrders())
+            .then(() => this.setState({loading: false}));
     }
 
     render() {
@@ -31,7 +36,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    getMe: () => dispatch(getMe())
+    getMe: () => dispatch(getMe()),
+    getMyOrders: () => dispatch(getOrders()),
+    getMyRepositories: () => dispatch(all())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

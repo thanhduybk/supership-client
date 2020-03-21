@@ -1,15 +1,42 @@
 import React, {Component} from 'react';
-import {Alert, Button, Card} from "antd";
+import {Alert, Button, Card, notification} from "antd";
 import './OrderCreationConfirmation.scss'
+import {createOrder} from '../../actions/order.action';
+import {connect} from "react-redux";
+import WrappedOrderUploadModal from "../OrderUploadModal/OrderUploadModal";
 
 class OrderCreationConfirmation extends Component {
 
-    isFormValid = (request) => {
-        return request.repository_id !== null &&
-            request.product.length > 0 &&
-            request.receiver.length > 0 &&
-            request.address.length > 0 &&
-            request.ward_id !== null
+    isDataValid = (data) => {
+        return data.product !== '' &&
+            data.receiver !== '' &&
+            data.address !== '' &&
+            data.ward_id !== null &&
+            data.repository_id !== null &&
+            !isNaN(parseInt(data.money_taking));
+    };
+
+    handleSubmit = e => {
+        e.preventDefault();
+        const data = {...this.props.onRequestSubmitted()};
+
+        if (this.isDataValid(data)) {
+            this.props.createOrder(data.product, data.receiver, data.address, data.ward_id, data.repository_id, data.money_taking)
+                .then(status => {
+                    if (status === 201) {
+                        notification.success({
+                            message: 'Success!',
+                            description: 'Created order successfully'
+                        });
+                        this.props.history.push('/orders');
+                    } else {
+                        notification.error({
+                            message: 'Error!',
+                            description: 'Failed to create order'
+                        })
+                    }
+                })
+        }
     };
 
     render() {
@@ -24,8 +51,7 @@ class OrderCreationConfirmation extends Component {
                     >
                         <p>
                             [1] Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ac blandit purus. Sed in
-                            dui
-                            mi.
+                            dui mi.
                         </p>
                         <p>
                             [2] Quisque hendrerit enim et neque eleifend cursus. Quisque varius massa ut leo maximus
@@ -47,15 +73,21 @@ class OrderCreationConfirmation extends Component {
                     <Button
                         type="danger"
                         id="submit-button"
-                        disabled={this.isFormValid(this.props.data)}
-                        onClick={this.props.onRequestSubmitted}
+                        onClick={this.handleSubmit}
                     >
                         Create Order
                     </Button>
+
+                    <WrappedOrderUploadModal/>
                 </div>
             </>
         );
     }
 }
 
-export default OrderCreationConfirmation;
+const mapDispatchToProps = dispatch => ({
+    createOrder: (product, receiver, address, wardId, repositoryId, moneyTaking) =>
+        dispatch(createOrder(product, receiver, address, wardId, repositoryId, moneyTaking))
+});
+
+export default connect(null, mapDispatchToProps)(OrderCreationConfirmation);

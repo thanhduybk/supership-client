@@ -21,18 +21,23 @@ export function login(emailOrPhone, password) {
     return async (dispatch) => {
         try {
             dispatch(requestPending(LOGIN_PENDING));
-            const { data } = await api.login(emailOrPhone, password);
+            const { data, status } = await api.login(emailOrPhone, password);
             localStorage.setItem('token', `Bearer ${data.result.token}`);
             dispatch(requestCompleted(LOGIN_SUCCESS, data));
+            return status;
         } catch (err) {
             if (err.response) {
                 console.log(err.response.data);
-                dispatch(requestFailure(LOGIN_FAILED, err.response.data))
+                dispatch(requestFailure(LOGIN_FAILED, err.response.data));
+                return err.response.status;
             } else if (err.request) { // No response was received
                 console.log(err.request);
+                return 500;
             } else { // Something happened in setting up the request that triggered an Error
                 console.log('Error', err.message);
+                return 500;
             }
+
         }
     }
 }
