@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import './Header.scss';
 import {connect} from "react-redux";
-import {Link, withRouter} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {Avatar, Icon, Menu} from "antd";
 import {logout} from "../../actions/auth.action";
 
@@ -15,6 +15,10 @@ class Header extends Component {
 
     render() {
         const {user} = this.props;
+
+        if (!user) {
+            return null;
+        }
 
         return (
             <Menu mode="horizontal" id="menu" onSelect={this.onSelect}>
@@ -71,4 +75,4 @@ const mapDispatchToProps = dispatch => ({
     logout: () => dispatch(logout()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Header));
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

@@ -3,30 +3,34 @@ import PropTypes from 'prop-types';
 import {Form, Input, Button, notification, Icon, Checkbox} from 'antd';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {login} from '../../actions/auth.action';
+import {getMe, login} from '../../actions/auth.action';
 import './LoginPage.scss';
+import {getOrders} from "../../actions/order.action";
 
 class LoginPage extends Component {
-    handleSubmit = e => {
+    handleSubmit = async e => {
         e.preventDefault();
-        const {form, login} = this.props;
-        form.validateFields((err, values) => {
+        const {form, login, getMe, getMyOrders} = this.props;
+        form.validateFields(async (err, values) => {
             if (!err) {
                 const {emailOrPhone, password} = values;
-                login(emailOrPhone, password).then(() => {
-                    if (this.props.authenticated) {
-                        notification.success({
-                            message: 'Success!',
-                            description: this.props.message,
-                        });
-                        this.props.history.push('/');
-                    } else {
-                        notification.error({
-                            message: 'Failed!',
-                            description: this.props.message
-                        });
-                    }
-                })
+                const status = await login(emailOrPhone, password);
+
+                if (this.props.authenticated && status === 200) {
+                    notification.success({
+                        message: 'Success!',
+                        description: this.props.message,
+                    });
+                    this.props.history.push('/');
+                } else {
+                    notification.error({
+                        message: 'Failed!',
+                        description: this.props.message
+                    });
+                }
+
+                await getMe();
+                await getMyOrders();
             }
         });
     };
@@ -73,7 +77,7 @@ class LoginPage extends Component {
                         <Form.Item name="remember" style={{display: 'inline'}}>
                             <Checkbox className="remember">Remember me</Checkbox>)
 
-                            <Button type="primary" htmlType="submit" className="login-button" >
+                            <Button type="primary" htmlType="submit" className="login-button">
                                 Log in
                             </Button>
                         </Form.Item>
@@ -103,6 +107,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     login: (emailOrPhone, password) => dispatch(login(emailOrPhone, password)),
+    getMe: () => dispatch(getMe()),
+    getMyOrders: () => dispatch(getOrders())
 });
 
 const WrappedLoginPage = Form.create({name: 'login_form'})(

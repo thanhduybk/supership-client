@@ -6,6 +6,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import MainLayout from "./components/MainLayout";
 import OrderCreationPage from "./pages/OrderCreationPage/OrderCreationPage";
+import OrdersPage from "./pages/OrdersPage/OrdersPage";
 
 const PrivateRoute = ({component: Component, authenticated, ...rest}) => (
     <Route render={
@@ -23,6 +24,7 @@ function WebRouter(props) {
                 <MainLayout>
                     <Switch>
                         <PrivateRoute exact path="/" component={HomePage} authenticated={props.authenticated} />
+                        <PrivateRoute exact path="/orders" component={OrdersPage} authenticated={props.authenticated} />
                         <PrivateRoute exact path="/orders/create" component={OrderCreationPage} authenticated={props.authenticated} />
                     </Switch>
                 </MainLayout>

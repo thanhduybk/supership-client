@@ -1,9 +1,10 @@
 #order-creation-confirm {
   margin: 0 calc(5%);
 
-  #submit-button {
+  #submit-button,
+  #upload-button {
     padding: 0 calc(33%);
-    margin: 0 calc(5%);
+    margin: 0 calc(5%) 10px;
   }
 
   #fees {
